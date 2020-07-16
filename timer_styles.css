@@ -157,16 +157,19 @@ div.timer-buttons-container {
     padding: 0 0 0.5em;
 }
 
-/* SET */
-div.set-container {
+
+
+/* EDIT DURATION Container */
+div.edit-duration-container {
     padding: 0 0 1em;
 }
 
-div#set-inputs {
+/* Edit Dur Inputs Container */
+div.edit-duration-container > #edit-duration-inputs {
     margin: 0.5em 0 0;
 }
 
-/* Unit Labels */
+/* Unit Labels For Set/Edit Time Inputs */
 label.set-unit-labels {
     font-size: 10pt;
     /* font-weight: normal; */

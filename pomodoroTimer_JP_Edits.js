@@ -15,9 +15,10 @@ let breakTime = false;      //variable to keep track of when it is a break inter
 
 
 //Variables related to the sessions
-// let pomodoroTimer = {workInterval: 0, breakInterval: 0};
+let pomodoroTimer = {workInterval: 0, breakInterval: 0};
+
 // With Default times 25min and 5min:
-let pomodoroTimer = {workInterval: (25*60), breakInterval: (5*60)};
+// let pomodoroTimer = {workInterval: (25*60), breakInterval: (5*60)};
 
 let timeLeftInSession = pomodoroTimer.workInterval;
 
@@ -27,20 +28,36 @@ let totalTimeInSession = 0;
 
 
 // DOM Elements:
+
+// Task time inputs:
+const setTaskHour = document.querySelector('#set-task-hour');
+const setTaskMin = document.querySelector('#set-task-min');
+const setTaskSec = document.querySelector('#set-task-sec');
+// Break time inputs:
+const setBreakHour = document.querySelector('#set-break-hour');
+const setBreakMin = document.querySelector('#set-break-min');
+const setBreakSec = document.querySelector('#set-break-sec');
+// Set Time Button:
+const setTimesButton = document.querySelector('#set-times-button');
+
+
 // Timer Container:
 const timerContainer = document.querySelector('#timer-container');
-// Task Select:
 // Task Selection Input Element:
 const taskSelect = document.querySelector('#task-dropdown-select');
 // Currently Selected Task:
 const taskSelected = document.querySelector('option.task-dropdown-option[selected=true]')
-// Timer Buttons:
+// Start Button:
 const startButton = document.querySelector("#timer-start-pause");
+// Stop Button:
 const stopButton = document.querySelector("#timer-stop");
+// Skip Button:
 const skipButton = document.querySelector("#timer-skip");
-const editDurationButton = document.querySelector('#edit-duration');
-const setInputsContainer = document.querySelector('#set-inputs');
-const setButton = document.querySelector("#timer-set");
+// Edit Duration Inputs/Buttons:
+const openEditDurButton = document.querySelector('#open-edit-dur-button');
+const editDurInputs = document.querySelector('#edit-duration-inputs');
+const editDurSubmitButton = document.querySelector("#edit-duration-button");
+// Reset:
 const resetButton = document.querySelector("#timer-reset");
 // Timer countdown time:
 const countdownTime = document.querySelector("#countdown-time");
@@ -48,18 +65,39 @@ const countdownTime = document.querySelector("#countdown-time");
 const countdownFill = document.querySelector("#countdown-fill");
 
 
-
 //Assigns the click event listener to the buttons assigned above
+
+// Set times input:
+setTimesButton.addEventListener('click', function() {
+    let inputHour = parseInt(document.querySelector("#set-task-hour").value);
+    let inputMin = parseInt(document.querySelector("#set-task-min").value);
+    let inputSec = parseInt(document.querySelector("#set-task-sec").value);
+    // Update duration:
+    setDurations('task', inputHour, inputMin, inputSec);
+    // Update timeLeftInSession for correct timer session type:
+    if (isWorking) {
+        timeLeftInSession = pomodoroTimer.workInterval;
+    } else {
+        timeLeftInSession = pomodoroTimer.breakInterval;
+    }
+    // Display:
+    displayTimeLeft();
+    event.preventDefault();
+})
+
+// Start /Pause:
 startButton.addEventListener('click', function(){
     toggleTimer();
     toggleTimerVisuals();
 });
 
+// Stop:
 stopButton.addEventListener('click', function(){
     toggleTimer(true);
     toggleTimerVisuals();
 });
 
+// Skip:
 skipButton.addEventListener('click', function(){
     if(sessionEnded){
         console.log("session has ended");
@@ -72,19 +110,18 @@ skipButton.addEventListener('click', function(){
 
 
 // Edit Duration button (unhides or hides the set input fields)
-editDurationButton.addEventListener('click', function(){
-    if (setInputsContainer.classList.contains('hidden')) {
-        setInputsContainer.classList.remove('hidden');
+openEditDurButton.addEventListener('click', function(){
+    if (editDurInputs.classList.contains('hidden')) {
+        editDurInputs.classList.remove('hidden');
     } else {
-        setInputsContainer.classList.add('hidden');
+        editDurInputs.classList.add('hidden');
     }
 })
 
-
-// Set new duration
-setButton.addEventListener('click', function(){
+// Edit duration (Set new duration for current timer)
+editDurSubmitButton.addEventListener('click', function(){
     // Update duration:
-    updateDuration();
+    editDuration();
     // Update timeLeftInSession for correct timer session type:
     if (isWorking) {
         timeLeftInSession = pomodoroTimer.workInterval;
@@ -92,13 +129,13 @@ setButton.addEventListener('click', function(){
         timeLeftInSession = pomodoroTimer.breakInterval;
     }
     // Hide Input fields:
-    setInputsContainer.classList.add('hidden');
+    editDurInputs.classList.add('hidden');
     // Display:
     displayTimeLeft();
     event.preventDefault();
 });
 
-
+// Reset:
 resetButton.addEventListener('click', resetTimer);
 
 
@@ -109,13 +146,12 @@ resetButton.addEventListener('click', resetTimer);
  * startButton innerText = "Start". 
 ****************************************************************************************/
 function toggleTimerVisuals() {
-    // If timer complete:
-    // (Some sort of completed visual)
-    if (timeLeftInSession == 0) {
-        timerContainer.classList.add('complete');
-    } else {
-        timerContainer.classList.remove('complete');    
-    }
+    // If timer complete: (Some sort of completed visual)
+    // if (timeLeftInSession == 0) {
+    //     timerContainer.classList.add('complete');
+    // } else {
+    //     timerContainer.classList.remove('complete');    
+    // }
     // If timer is running:
     if (isTimerRunning){
         startButton.innerText = "Pause";
@@ -388,32 +424,60 @@ function displayTotalTimeOnTask(){
 
 
 
+/****************************************************************************************
+ * Function Name: setDurations()
+ * Description: This function gets time inputs for both timers (given initially), 
+ * converts to seconds, and sets workInterval and breakInterval to those given times.
+****************************************************************************************/
+function setDurations(){
+    // If no session already started:
+    if(!sessionStarted){ 
+        // Set task time:
+        let taskHour = parseInt(document.querySelector("#set-task-hour").value);
+        let taskMin = parseInt(document.querySelector("#set-task-min").value);
+        let taskSec = parseInt(document.querySelector("#set-task-sec").value);
+        
+        let taskHourToSec = taskHour * 60 * 60;
+        let taskMinToSec = taskMin * 60;
+        let totalTaskSec = taskHourToSec + taskMinToSec + taskSec;
+
+        pomodoroTimer.workInterval = totalTaskSec;
+
+        // Set break time:
+        let breakHour = parseInt(document.querySelector("#set-break-hour").value);
+        let breakMin = parseInt(document.querySelector("#set-break-min").value);
+        let breakSec = parseInt(document.querySelector("#set-break-sec").value);
+
+        let breakHourToSec = breakHour * 60 * 60;
+        let breakMinToSec = breakMin * 60;
+        let totalBreakSec = breakHourToSec + breakMinToSec + breakSec;
+
+        pomodoroTimer.breakInterval = totalBreakSec;
+    }
+}
+
 
 /****************************************************************************************
- * Function Name: updateDuration()
- * Description: This function takes time input(s), converts to seconds, and applies
+ * Function Name: editDuration()
+ * Description: This function gets provided updated time input, converts to seconds, and applies
  * to workInterval or breakInterval, depending on which timer type is currently in use.
 ****************************************************************************************/
-function updateDuration(){
-    // If no session started:
-    // if(!sessionStarted){
+function editDuration(hour, min, sec) {
+    let inputHour = parseInt(document.querySelector("#edit-hour").value);
+    let inputMin = parseInt(document.querySelector("#edit-min").value);
+    let inputSec = parseInt(document.querySelector("#edit-sec").value);
 
-        let inputHour = parseInt(document.querySelector("#set-hour").value);
-        let inputMin = parseInt(document.querySelector("#set-min").value);
-        let inputSec = parseInt(document.querySelector("#set-sec").value);
+    let inputHourToSec = inputHour * 60 * 60;
+    let inputMinToSec = inputMin * 60;
+    let totalSec = inputHourToSec + inputMinToSec + inputSec;
 
-        let inputHourToSec = inputHour * 60 * 60;
-        let inputMinToSec = inputMin * 60;
-        let totalSec = inputHourToSec + inputMinToSec + inputSec;
-
-        // Check timer classes for task or break status:
-        if (isWorking) {
-            pomodoroTimer.workInterval = totalSec;
-        }
-        else {
-            pomodoroTimer.breakInterval = totalSec;
-        }
-    // }
+    // Check timer classes for task or break status:
+    if (isWorking) {
+        pomodoroTimer.workInterval = totalSec;
+    }
+    else {
+        pomodoroTimer.breakInterval = totalSec;
+    }
 }
 
 
