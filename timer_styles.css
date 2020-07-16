@@ -1,91 +1,114 @@
 :root {    
-    --timer-width: 300px;
+    --timer-width: 250px;
     --dropdown-width: 200px;
-    --header-height: 30px;
-    --header-bg-color: #cccccc;
-    --header-bg-color-highlight: #dddddd;
-    --dropdown-bg-color-highlight: #dddddd;
-    --countdown-bar-bg-color: #eeeeee;
+    --header-height: 35px;
+    --timer-container-color: #bbbbbb;
+    --timer-container-running-color: #b0d1c8;
+    --timer-complete-color: #5efc9a;
+    --timer-bg-color: #ffffff;
+    --countdown-bar-bg-color: #dddddd;
     --countdown-fill-width: 20%;
-    --countdown-fill-color: #18ff71;
+    --countdown-fill-color: #5efc9a;
+    --dropdown-bg-color-highlight: #dddddd;
+}
 
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12pt;
+    font-weight: bold;
 }
 
 /* TIMER CONTAINER */
 div.timer-container {
-    border: 1pt solid black;
+    border: 4pt solid var(--timer-container-color);
+    border-radius: 6pt;
     width: var(--timer-width);
     text-align: center;
+    background-color: var(--timer-bg-color);
+    z-index: 4;
 }
+
+/* Running: */
+div.timer-container.running {
+    border: 4pt solid var(--timer-container-running-color);
+}
+
+/* Complete: */
+div.timer-container.complete {
+    border: 4pt solid var(--timer-complete-color);
+}
+
 
 /* TIMER HEADER */
 div.timer-header {
     height: var(--header-height);
-    background-color: var(--header-bg-color);
+    background-color: var(--timer-container-color);
+}
+
+/* Running: */
+div.timer-container.running > div.timer-header,
+div.timer-container.running > div.timer-header > div > select.task-dropdown-select {
+    background-color: var(--timer-container-running-color);
+}
+
+/* Complete: */
+div.timer-container.complete > div.timer-header,
+div.timer-container.complete > div.timer-header > div > select.task-dropdown-select {
+    background-color: var(--timer-complete-color);
 }
 
 
-/* TASK TIMER HEADER */
-div.task-header {
-    display: grid;
-    grid-template-columns: auto auto auto;
-}
 
-div.break-header {
-    display: grid;
-    grid-template-columns: auto;
-}
 
+div.break-header-item {
+    height: var(--header-height);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 /* HIDE NON-RELAVENT HEADER ITEMS */
-div.task-header > div.break-header-item {
+div.task-timer > div.timer-header > div.break-header-item {
     display: none;
+    height: 0;
 }
-div.break-header > div.task-header-item {
+
+div.break-timer > div.timer-header > div.task-header-item {
     display: none;
+    height: 0;
 }
 
 
-
-/* Header height */
-div.timer-header {
+/* DROP DOWN AS SELECT      **But want to display Category too**  */
+select.task-dropdown-select {
+    /* -webkit-appearance: none; */
+    /* -moz-appearance: none; */
+    /* -ms-appearance: none; */
+    /* -o-appearance: none; */
+    /* appearance: none; */
+    border: none;
+    outline: none;
+    box-shadow: none;
+    color: #000000;
+    background-color: var(--timer-container-color);
+    overflow: hidden;
     height: var(--header-height);
-    line-height: 0;
-}
-
-div.timer-header > div {
-    height: var(--header-height);
-    line-height: 0;
-}
-
-/* DROPDOWN MENU BUTTON */
-div.dropdown-menu-button {
-    cursor: pointer;
-}
-
-div.dropdown-container:hover {
-    background-color: var(--header-bg-color-highlight);
-}
-
-/* DROPDOWN MENU */ 
-/* Need to fix alignment */
-div.dropdown-menu {
-    position: absolute;
-    z-index: 4;
-    width: var(--dropdown-width);
+    width: 100%;
+    font-weight: bold;
+    font-size: 12pt;
     text-align: left;
-    border: 1pt solid black;
-    background-color: #ffffff;
 }
 
-/* DROP DOWN ITEMS */
-div.dropdown-menu-item {
-    cursor: pointer;
-}
-
-/* This isn't working... */
-div.dropdown-menu-item:hover {
+/* DROPDOWN OPTION GROUPS */
+optgroup.task-dropdown-optgroup {
     background-color: var(--dropdown-bg-color-highlight);
+    font-weight: bold;
+}
+
+/* DROPDOWN OPTIONS */
+option.task-dropdown-option {
+    background-color: #FFFFFF;
+    font-weight: normal;
 }
 
 
@@ -93,8 +116,9 @@ div.dropdown-menu-item:hover {
 .countdown-bar {
     position: relative;
     height: 60px;
-    margin: 1em 0 1.2em;
+    margin: 0.7em 0;
     background-color: var(--countdown-bar-bg-color);
+    z-index: 1;
 }
 
 /* Visual fill background bar: */
@@ -111,10 +135,10 @@ div.dropdown-menu-item:hover {
 .countdown-time {
     position: relative;
     height: 60px;
-    font-size: 24pt;
+    font-size: 34pt;
     font-weight: bold;
     z-index: 3;
-    padding: 0.3em;
+    padding: 0.1em;
 }
 
 /* HIDDEN */
@@ -129,6 +153,34 @@ div.hidden > * {
 }
 
 /* TIMER BUTTONS */
-.timer-buttons-container {
+div.timer-buttons-container {
     padding: 0 0 0.5em;
+}
+
+/* SET */
+div.set-container {
+    padding: 0 0 1em;
+}
+
+div#set-inputs {
+    margin: 0.5em 0 0;
+}
+
+/* Unit Labels */
+label.set-unit-labels {
+    font-size: 10pt;
+    /* font-weight: normal; */
+    padding: 0 0.5em 0 0;
+    margin: 0;
+}
+
+
+/* All timer buttons: */
+button.timer-button {
+    min-width: 55px;
+}
+
+button.timer-button#timer-set {
+    min-width: 40px;
+    width: 40px;
 }

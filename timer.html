@@ -12,47 +12,36 @@
     <div id="timer-container" class="timer-container task-timer">
 
         <!-- TIMER HEADER -->
-        <!-- The class (task-header/break-header will hide non-relavent items) -->
-        <div id="timer-header" class="timer-header break-header">
+        <!-- The timer-container's class will determine which header items to show/hide -->
+        <div id="timer-header" class="timer-header">
+            <!-- TASK HEADER as Select input -->
+            <div class="task-header-item">
+                <select id="task-dropdown-select" class="task-dropdown-select">
+                    <!-- These are placeholders for testing -->
+                    <!-- Using only options: -->
+                    <option class="task-dropdown-option" selected>Task 1 --- Category 1</option>
+                    <option class="task-dropdown-option" >Task 2 --- Category 2</option>
+                    <option class="task-dropdown-option" >Task 3 --- Categroy 2</option>
+                    <!-- Using optgroups for categories? -->
+                    <optgroup class="task-dropdown-optgroup" label="Category 1">
+                        <option class="task-dropdown-option" >Task 1</option>
+                    </optgroup>
+                    <optgroup class="task-dropdown-optgroup" label="Category 2">
+                        <option class="task-dropdown-option" >Task 2</option>
+                        <option class="task-dropdown-option" >Task 3</option>
+                        <option class="task-dropdown-option" >Task 4</option>
+                    </optgroup>
+                    <optgroup class="task-dropdown-optgroup" label="Category 3">
+                        <option class="task-dropdown-option" >Task 5</option>
+                        <option class="task-dropdown-option" >Task 6</option>
+                    </optgroup>
+                </select>
+            </div>
 
-            <!-- FOR BREAK TIMER -->
-            <!-- Break Title -->
+            <!-- BREAK HEADER -->
             <div id="break-timer-title-container" class="break-header-item">
-                <p id="break-timer-title">Break</p>
+                <div id="break-timer-title">Break</div>
             </div>
-
-            <!-- FOR TASK TIMER -->
-            <!-- Task Name -->
-            <div id="task-timer-name-container" class="task-header-item">
-                <p id="task-timer-name">Task Name</p>
-            </div>
-
-            <!-- Task Category -->
-            <div id="task-timer-category-container" class="task-header-item">
-                <p id="task-timer-category">Category</p>
-            </div>
-
-            <!-- Change Task Drop Down Menu Button -->
-            <!-- ** DROP DOWN needs to be fixed ** -->
-            <div id="change-task-container" class="dropdown-container task-header-item">
-                <!-- (Could be caret symbol instead) -->
-                <div id="change-task-button" class="dropdown-menu-button">
-                    <p id="change-task-text">Change Task</p>
-                </div>
-
-                <!-- Change Task Drop Down Menu (hidden until button clicked) -->
-                <div id="change-task-dropdown-menu" class="dropdown-menu hidden">
-                    <!-- Tasks to pick from inserted here -->
-                    <div class="dropdown-menu-item">
-                        <p id="task-option-test1">An Example Task</p>
-                    </div>
-                    <div class="dropdown-menu-item">
-                        <p id="task-option-test2">Another Example Task</p>
-                    </div>
-                </div>
-            </div>
-
-           
 
         </div>
 
@@ -70,27 +59,192 @@
         <!-- BUTTONS -->
         <div id="timer-buttons-container" class="timer-buttons-container">
             <!-- Reset (Restart the timer) -->
-            <button id="timer-reset" class="reset-button">Reset</button>
+            <button id="timer-reset" class="timer-button reset-button">Reset</button>
 
             <!-- Start/Pause (toggles with JS) -->
-            <button id="timer-start-pause" class="start-pause-button">Start</button>
+            <button id="timer-start-pause" class="timer-button start-pause-button">Start</button>
 
             <!-- Stop  -->
-            <button id="timer-stop" class="stop-button">Stop</button>
+            <button id="timer-stop" class="timer-button stop-button">Stop</button>
 
             <!-- Skip -->
-            <button id="timer-skip" class="skip-button">Skip</button>
+            <button id="timer-skip" class="timer-button skip-button">Skip</button>
         </div>
 
-        <div id="timer-buttons-container-2" class="timer-buttons-container">
-            <!-- ** New duration input ** -->
-            <input id="timer-set-input" class="set-input" type="number" min="1" max="60" />
+        <!-- SET DURATION -->
+        <div id="set-container" class="set-container">
+            <!-- New duration input -->
+            <!-- As one input in min (0-60): -->
+            <!-- <input id="timer-set-input" class="set-input" type="number" min="1" max="60" /> -->
 
-            <!-- Set timer duration: onclick allows input -->
-            <button id="timer-set" class="set-button">Set Duration</button>
+            <!-- Set timer duration (hide input fields until clicked) -->
+            <button id="edit-duration" class="timer-button">Change Duration</button>
+            
+            <div id="set-inputs" class="hidden">
+                <!-- As multiple select inputs in hour, min, sec -->
+                <!-- Hour -->
+                <select id="set-hour">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                </select>
+                <label for="set-hour" class="set-unit-labels">h</label>
+                <!-- Minute -->
+                <select id="set-min">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                    <option value="24">24</option>
+                    <option value="25">25</option>
+                    <option value="26">26</option>
+                    <option value="27">27</option>
+                    <option value="28">28</option>
+                    <option value="29">29</option>
+                    <option value="30">30</option>
+                    <option value="31">31</option>
+                    <option value="32">32</option>
+                    <option value="33">33</option>
+                    <option value="34">34</option>
+                    <option value="35">35</option>
+                    <option value="36">36</option>
+                    <option value="37">37</option>
+                    <option value="38">38</option>
+                    <option value="39">39</option>
+                    <option value="40">40</option>
+                    <option value="41">41</option>
+                    <option value="42">42</option>
+                    <option value="43">43</option>
+                    <option value="44">44</option>
+                    <option value="45">45</option>
+                    <option value="46">46</option>
+                    <option value="47">47</option>
+                    <option value="48">48</option>
+                    <option value="49">49</option>
+                    <option value="50">50</option>
+                    <option value="51">51</option>
+                    <option value="52">52</option>
+                    <option value="53">53</option>
+                    <option value="54">54</option>
+                    <option value="55">55</option>
+                    <option value="56">56</option>
+                    <option value="57">57</option>
+                    <option value="58">58</option>
+                    <option value="59">59</option>
+                </select>
+                <label for="set-min" class="set-unit-labels">m</label>
+                <!-- Second -->
+                <select id="set-sec">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                    <option value="24">24</option>
+                    <option value="25">25</option>
+                    <option value="26">26</option>
+                    <option value="27">27</option>
+                    <option value="28">28</option>
+                    <option value="29">29</option>
+                    <option value="30">30</option>
+                    <option value="31">31</option>
+                    <option value="32">32</option>
+                    <option value="33">33</option>
+                    <option value="34">34</option>
+                    <option value="35">35</option>
+                    <option value="36">36</option>
+                    <option value="37">37</option>
+                    <option value="38">38</option>
+                    <option value="39">39</option>
+                    <option value="40">40</option>
+                    <option value="41">41</option>
+                    <option value="42">42</option>
+                    <option value="43">43</option>
+                    <option value="44">44</option>
+                    <option value="45">45</option>
+                    <option value="46">46</option>
+                    <option value="47">47</option>
+                    <option value="48">48</option>
+                    <option value="49">49</option>
+                    <option value="50">50</option>
+                    <option value="51">51</option>
+                    <option value="52">52</option>
+                    <option value="53">53</option>
+                    <option value="54">54</option>
+                    <option value="55">55</option>
+                    <option value="56">56</option>
+                    <option value="57">57</option>
+                    <option value="58">58</option>
+                    <option value="59">59</option>
+                </select>
+                <label for="set-hour" class="set-unit-labels">s</label>
+
+                <button id="timer-set" class="timer-button set-button">Set</button>
+
+            </div>
+
 
         </div>
-        <br>
 
     </div>
 
@@ -99,8 +253,6 @@
     <p id="total task"></p>
 
 
-
-    <script src="timer_frontend_interactive.js"></script>
     <script src="pomodoroTimer_JP_Edits.js"></script>
 
 </body>
