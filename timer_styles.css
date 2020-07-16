@@ -1,0 +1,134 @@
+:root {    
+    --timer-width: 300px;
+    --dropdown-width: 200px;
+    --header-height: 30px;
+    --header-bg-color: #cccccc;
+    --header-bg-color-highlight: #dddddd;
+    --dropdown-bg-color-highlight: #dddddd;
+    --countdown-bar-bg-color: #eeeeee;
+    --countdown-fill-width: 20%;
+    --countdown-fill-color: #18ff71;
+
+}
+
+/* TIMER CONTAINER */
+div.timer-container {
+    border: 1pt solid black;
+    width: var(--timer-width);
+    text-align: center;
+}
+
+/* TIMER HEADER */
+div.timer-header {
+    height: var(--header-height);
+    background-color: var(--header-bg-color);
+}
+
+
+/* TASK TIMER HEADER */
+div.task-header {
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+div.break-header {
+    display: grid;
+    grid-template-columns: auto;
+}
+
+
+/* HIDE NON-RELAVENT HEADER ITEMS */
+div.task-header > div.break-header-item {
+    display: none;
+}
+div.break-header > div.task-header-item {
+    display: none;
+}
+
+
+
+/* Header height */
+div.timer-header {
+    height: var(--header-height);
+    line-height: 0;
+}
+
+div.timer-header > div {
+    height: var(--header-height);
+    line-height: 0;
+}
+
+/* DROPDOWN MENU BUTTON */
+div.dropdown-menu-button {
+    cursor: pointer;
+}
+
+div.dropdown-container:hover {
+    background-color: var(--header-bg-color-highlight);
+}
+
+/* DROPDOWN MENU */ 
+/* Need to fix alignment */
+div.dropdown-menu {
+    position: absolute;
+    z-index: 4;
+    width: var(--dropdown-width);
+    text-align: left;
+    border: 1pt solid black;
+    background-color: #ffffff;
+}
+
+/* DROP DOWN ITEMS */
+div.dropdown-menu-item {
+    cursor: pointer;
+}
+
+/* This isn't working... */
+div.dropdown-menu-item:hover {
+    background-color: var(--dropdown-bg-color-highlight);
+}
+
+
+/* COUNTDOWN */
+.countdown-bar {
+    position: relative;
+    height: 60px;
+    margin: 1em 0 1.2em;
+    background-color: var(--countdown-bar-bg-color);
+}
+
+/* Visual fill background bar: */
+.countdown-fill {
+    position: absolute;
+    content: "";
+    height: 60px;
+    width: var(--countdown-fill-width);
+    background-color: var(--countdown-fill-color);
+    z-index: 2;
+}
+
+/* COUNTDOWN TIME */
+.countdown-time {
+    position: relative;
+    height: 60px;
+    font-size: 24pt;
+    font-weight: bold;
+    z-index: 3;
+    padding: 0.3em;
+}
+
+/* HIDDEN */
+div.hidden {
+    display: none;
+    pointer-events: none;
+}
+
+div.hidden > * {
+    display: none;
+    pointer-events: none;
+}
+
+/* TIMER BUTTONS */
+.timer-buttons-container {
+    padding: 0 0 0.5em;
+}

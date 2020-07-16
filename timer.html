@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer</title>
+    <link rel="stylesheet" href="timer_styles.css">
+</head>
+
+<body>
+    <!-- Timer -->
+    <div id="timer-container" class="timer-container task-timer">
+
+        <!-- TIMER HEADER -->
+        <!-- The class (task-header/break-header will hide non-relavent items) -->
+        <div id="timer-header" class="timer-header break-header">
+
+            <!-- FOR BREAK TIMER -->
+            <!-- Break Title -->
+            <div id="break-timer-title-container" class="break-header-item">
+                <p id="break-timer-title">Break</p>
+            </div>
+
+            <!-- FOR TASK TIMER -->
+            <!-- Task Name -->
+            <div id="task-timer-name-container" class="task-header-item">
+                <p id="task-timer-name">Task Name</p>
+            </div>
+
+            <!-- Task Category -->
+            <div id="task-timer-category-container" class="task-header-item">
+                <p id="task-timer-category">Category</p>
+            </div>
+
+            <!-- Change Task Drop Down Menu Button -->
+            <!-- ** DROP DOWN needs to be fixed ** -->
+            <div id="change-task-container" class="dropdown-container task-header-item">
+                <!-- (Could be caret symbol instead) -->
+                <div id="change-task-button" class="dropdown-menu-button">
+                    <p id="change-task-text">Change Task</p>
+                </div>
+
+                <!-- Change Task Drop Down Menu (hidden until button clicked) -->
+                <div id="change-task-dropdown-menu" class="dropdown-menu hidden">
+                    <!-- Tasks to pick from inserted here -->
+                    <div class="dropdown-menu-item">
+                        <p id="task-option-test1">An Example Task</p>
+                    </div>
+                    <div class="dropdown-menu-item">
+                        <p id="task-option-test2">Another Example Task</p>
+                    </div>
+                </div>
+            </div>
+
+           
+
+        </div>
+
+        <!-- COUNTDOWN -->
+        <div id="countdown-container" class="countdown-container">
+            <div id="countdown-bar" class="countdown-bar">
+                <!-- Visual Fill -->
+                <div id="countdown-fill" class="countdown-fill"> </div>
+                <!-- Time -->
+                <div id="countdown-time" class="countdown-time">20:00</div>
+            </div>
+        </div>
+
+
+        <!-- BUTTONS -->
+        <div id="timer-buttons-container" class="timer-buttons-container">
+            <!-- Reset (Restart the timer) -->
+            <button id="timer-reset" class="reset-button">Reset</button>
+
+            <!-- Start/Pause (toggles with JS) -->
+            <button id="timer-start-pause" class="start-pause-button">Start</button>
+
+            <!-- Stop  -->
+            <button id="timer-stop" class="stop-button">Stop</button>
+
+            <!-- Skip -->
+            <button id="timer-skip" class="skip-button">Skip</button>
+        </div>
+
+        <div id="timer-buttons-container-2" class="timer-buttons-container">
+            <!-- ** New duration input ** -->
+            <input id="timer-set-input" class="set-input" type="number" min="1" max="60" />
+
+            <!-- Set timer duration: onclick allows input -->
+            <button id="timer-set" class="set-button">Set Duration</button>
+
+        </div>
+        <br>
+
+    </div>
+
+
+    <h2>Time Spent on Task:</h2>
+    <p id="total task"></p>
+
+
+
+    <script src="timer_frontend_interactive.js"></script>
+    <script src="pomodoroTimer_JP_Edits.js"></script>
+
+</body>
+</html>
