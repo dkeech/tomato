@@ -46,6 +46,12 @@ var countdownFill = document.getElementById("countdown-fill");
 //Assigns the click event listener to the buttons assigned above
 startButton.addEventListener('click', function(){
     toggleTimer();
+    // Set Start Button inner text:
+    if(isTimerRunning){
+        startButton.innerText = "Pause";
+    } else {
+        startButton.innerText = "Start";
+    }
 });
 
 stopButton.addEventListener('click', function(){
