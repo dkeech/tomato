@@ -16,6 +16,12 @@ Bootstrap 4
 * MySQL
 * jQuery / jQuery UI
 
-Architecture Diagram
+# Architecture Diagram
 
 ![Image of Architecture](https://github.com/dkeech/tomato/blob/master/architecture_diagram.JPG)
+
+
+# API Documentation
+
+Tomato uses Swagger for API documentation. Paste the contents of docs/tomato.yaml
+into https://editor.swagger.com
