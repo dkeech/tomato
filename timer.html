@@ -39,7 +39,7 @@
     
     <!-- Temporary set timer input: -->
     <div class="container" style="text-align: center;">
-            <!-- Simple Timers Form -->
+        <!-- Simple Timers Form -->
         <h2>Set Timer:</h2>
         <div id="set-task-time">
             <p>Task Time:</p>
@@ -389,32 +389,30 @@
         <div id="countdown-container" class="countdown-container">
             <div id="countdown-bar" class="countdown-bar">
                 <!-- Visual Fill -->
-                <div id="countdown-fill" class="countdown-fill"> </div>
+                <div id="countdown-fill" class="countdown-fill"></div>
                 <!-- Time -->
-                <div id="countdown-time" class="countdown-time">20:00</div>
+                <div id="countdown-time" class="countdown-time">00:00:00</div>
             </div>
         </div>
 
 
         <!-- BUTTONS -->
-        <div id="timer-buttons-container" class="timer-buttons-container">
+        <div id="timer-buttons-container" class="container">
             <!-- Reset (Restart the timer) -->
-            <button id="timer-reset" class="timer-button reset-button">Reset</button>
+            <button id="timer-reset" class="btn btn-sm btn-primary" type="button">Reset</button>
 
             <!-- Start/Pause (toggles with JS) -->
-            <button id="timer-start-pause" class="timer-button start-pause-button">Start</button>
+            <button id="timer-start-pause" class="btn btn-sm btn-primary" type="button">Start</button>
 
             <!-- Stop  -->
-            <button id="timer-stop" class="timer-button stop-button">Stop</button>
+            <button id="timer-stop" class="btn btn-sm btn-primary" type="button">Stop</button>
 
             <!-- Skip -->
-            <button id="timer-skip" class="timer-button skip-button">Skip</button>
+            <button id="timer-skip" class="btn btn-sm btn-primary" type="button">Skip</button>
         </div>
 
         <!-- EDIT DURATION -->
-        
-
-        <div id="edit-duration-container" class="edit-duration-container">
+        <div id="edit-duration-container" class="container edit-duration-container">
             <button id="edit-duration-button" class="btn btn-primary" type="button" data-toggle="collapse" data-target="#edit-duration-inputs" aria-expanded="false" aria-controls="collapseExample">
                 Change Duration
             </button>
@@ -580,7 +578,7 @@
                 <label for="edit-sec" class="set-unit-labels">s</label>
                 
                 <!-- Submit -->
-                <button id="edit-duration-button" class="timer-button set-button">Set</button>
+                <button id="edit-duration-button" class="timer-button set-button btn btn-sm btn-primary" type="button">Set</button>
             </div>
 
         </div>

@@ -6,7 +6,7 @@
     --timer-container-running-color: #b0d1c8;
     --timer-bg-color: #ffffff;
     --countdown-bar-bg-color: #dddddd;
-    --countdown-fill-width: 20%;
+    --countdown-fill-width: 0%;
     --countdown-fill-color: #5efc9a;
     --dropdown-bg-color-highlight: #dddddd;
 }
@@ -116,11 +116,6 @@ div.hidden > * {
     pointer-events: none;
 }
 
-/* TIMER BUTTONS */
-div.timer-buttons-container {
-    padding: 0 0 0.5em;
-}
-
 
 
 /* EDIT DURATION Container */
@@ -142,12 +137,3 @@ label.set-unit-labels {
 }
 
 
-/* All timer buttons: */
-button.timer-button {
-    min-width: 55px;
-}
-
-button.timer-button#timer-set {
-    min-width: 40px;
-    width: 40px;
-}
