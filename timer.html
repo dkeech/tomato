@@ -6,10 +6,11 @@
         <title>Timer</title>
         <link rel="stylesheet" href="timer_styles.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     </head>
     <body>
 
-    
+
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">No Time like Tomato</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,8 +36,8 @@
         </ul>
         </div>
     </nav>
-        
-    
+
+
     <!-- Temporary set timer input: -->
     <div class="container" style="text-align: center;">
         <!-- Simple Timers Form -->
@@ -367,221 +368,237 @@
         </div>
     </div>
 
+    <br>
     <!-- Timer -->
     <div id="timer-container" class="container timer-container task-timer">
 
         <!-- TIMER HEADER -->
         <!-- The timer-container's class will determine which header items to show/hide -->
         <!-- TASK HEADER as Select input -->
-        <select id="task-dropdown-header" class="mdb-select timer-header task-dropdown-header">
-            <option value="" disabled selected>Select Your Task</option>
-            <option value="1">Task 1</option>
-            <option value="2">Task 2</option>
-            <option value="3">Task 3</option>
+        <select id="task-dropdown-header" class="selectpicker timer-header task-dropdown-header">
+            <option class="task-dropdown-option" value="" disabled selected>Select Your Task</option>
+            <option class="task-dropdown-option" value="1">Task 1</option>
+            <option class="task-dropdown-option" value="2">Task 2</option>
+            <option class="task-dropdown-option" value="3">Task 3</option>
         </select>
-            
+
         <!-- BREAK HEADER -->
         <div id="break-timer-title-container" class="timer-header break-header">
             <div id="break-timer-title">Break</div>
         </div>
 
         <!-- COUNTDOWN -->
-        <div id="countdown-container" class="countdown-container">
-            <div id="countdown-bar" class="countdown-bar">
-                <!-- Visual Fill -->
-                <div id="countdown-fill" class="countdown-fill"></div>
-                <!-- Time -->
-                <div id="countdown-time" class="countdown-time">00:00:00</div>
-            </div>
+        <div class="countdown-bar">
+            <div id="countdown-fill" class="countdown-fill"></div>
+            <div id="countdown-time" class="countdown-time">00:00:00</div>
         </div>
 
 
         <!-- BUTTONS -->
-        <div id="timer-buttons-container" class="container">
-            <!-- Reset (Restart the timer) -->
-            <button id="timer-reset" class="btn btn-sm btn-primary" type="button">Reset</button>
-
-            <!-- Start/Pause (toggles with JS) -->
-            <button id="timer-start-pause" class="btn btn-sm btn-primary" type="button">Start</button>
-
-            <!-- Stop  -->
-            <button id="timer-stop" class="btn btn-sm btn-primary" type="button">Stop</button>
-
-            <!-- Skip -->
-            <button id="timer-skip" class="btn btn-sm btn-primary" type="button">Skip</button>
-        </div>
-
-        <!-- EDIT DURATION -->
-        <div id="edit-duration-container" class="container edit-duration-container">
-            <button id="edit-duration-button" class="btn btn-primary" type="button" data-toggle="collapse" data-target="#edit-duration-inputs" aria-expanded="false" aria-controls="collapseExample">
-                Change Duration
+        <div id="timer-buttons-group" class="btn-group timer-button" role="group">
+            <!-- Edit Duration (Toggles input fields) -->
+            <button id="edit-duration-toggle" title="Change Timer Duration" class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#edit-duration-inputs" aria-expanded="false" aria-controls="collapseExample">
+                <i class="fa fa-pencil"></i>
             </button>
 
-            <div id="edit-duration-inputs" class="collapse">
-                <!-- Hour -->
-                <select id="edit-hour" class="mdb-select">
-                    <option value="0">0</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                    <option value="11">11</option>
-                    <option value="12">12</option>
-                    <option value="13">13</option>
-                    <option value="14">14</option>
-                    <option value="15">15</option>
-                    <option value="16">16</option>
-                    <option value="17">17</option>
-                    <option value="18">18</option>
-                    <option value="19">19</option>
-                    <option value="20">20</option>
-                    <option value="21">21</option>
-                    <option value="22">22</option>
-                    <option value="23">23</option>
-                </select>
-                <label for="edit-hour" class="set-unit-labels">h</label>
-                
-                <!-- Minute -->
-                <select id="edit-min">
-                    <option value="0">0</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                    <option value="11">11</option>
-                    <option value="12">12</option>
-                    <option value="13">13</option>
-                    <option value="14">14</option>
-                    <option value="15">15</option>
-                    <option value="16">16</option>
-                    <option value="17">17</option>
-                    <option value="18">18</option>
-                    <option value="19">19</option>
-                    <option value="20">20</option>
-                    <option value="21">21</option>
-                    <option value="22">22</option>
-                    <option value="23">23</option>
-                    <option value="24">24</option>
-                    <option value="25">25</option>
-                    <option value="26">26</option>
-                    <option value="27">27</option>
-                    <option value="28">28</option>
-                    <option value="29">29</option>
-                    <option value="30">30</option>
-                    <option value="31">31</option>
-                    <option value="32">32</option>
-                    <option value="33">33</option>
-                    <option value="34">34</option>
-                    <option value="35">35</option>
-                    <option value="36">36</option>
-                    <option value="37">37</option>
-                    <option value="38">38</option>
-                    <option value="39">39</option>
-                    <option value="40">40</option>
-                    <option value="41">41</option>
-                    <option value="42">42</option>
-                    <option value="43">43</option>
-                    <option value="44">44</option>
-                    <option value="45">45</option>
-                    <option value="46">46</option>
-                    <option value="47">47</option>
-                    <option value="48">48</option>
-                    <option value="49">49</option>
-                    <option value="50">50</option>
-                    <option value="51">51</option>
-                    <option value="52">52</option>
-                    <option value="53">53</option>
-                    <option value="54">54</option>
-                    <option value="55">55</option>
-                    <option value="56">56</option>
-                    <option value="57">57</option>
-                    <option value="58">58</option>
-                    <option value="59">59</option>
-                </select>
-                <label for="edit-min" class="set-unit-labels">m</label>
-                
-                <!-- Second -->
-                <select id="edit-sec">
-                    <option value="0">0</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                    <option value="11">11</option>
-                    <option value="12">12</option>
-                    <option value="13">13</option>
-                    <option value="14">14</option>
-                    <option value="15">15</option>
-                    <option value="16">16</option>
-                    <option value="17">17</option>
-                    <option value="18">18</option>
-                    <option value="19">19</option>
-                    <option value="20">20</option>
-                    <option value="21">21</option>
-                    <option value="22">22</option>
-                    <option value="23">23</option>
-                    <option value="24">24</option>
-                    <option value="25">25</option>
-                    <option value="26">26</option>
-                    <option value="27">27</option>
-                    <option value="28">28</option>
-                    <option value="29">29</option>
-                    <option value="30">30</option>
-                    <option value="31">31</option>
-                    <option value="32">32</option>
-                    <option value="33">33</option>
-                    <option value="34">34</option>
-                    <option value="35">35</option>
-                    <option value="36">36</option>
-                    <option value="37">37</option>
-                    <option value="38">38</option>
-                    <option value="39">39</option>
-                    <option value="40">40</option>
-                    <option value="41">41</option>
-                    <option value="42">42</option>
-                    <option value="43">43</option>
-                    <option value="44">44</option>
-                    <option value="45">45</option>
-                    <option value="46">46</option>
-                    <option value="47">47</option>
-                    <option value="48">48</option>
-                    <option value="49">49</option>
-                    <option value="50">50</option>
-                    <option value="51">51</option>
-                    <option value="52">52</option>
-                    <option value="53">53</option>
-                    <option value="54">54</option>
-                    <option value="55">55</option>
-                    <option value="56">56</option>
-                    <option value="57">57</option>
-                    <option value="58">58</option>
-                    <option value="59">59</option>
-                </select>
-                <label for="edit-sec" class="set-unit-labels">s</label>
-                
-                <!-- Submit -->
-                <button id="edit-duration-button" class="timer-button set-button btn btn-sm btn-primary" type="button">Set</button>
+            <!-- Reset (Restart the timer) -->
+            <button id="timer-reset" title="Restart Timer" class="btn btn-secondary" type="button"><i class="fa fa-repeat"></i></button>
+
+            <!-- Start/Pause (toggles with JS) -->
+            <button id="timer-start-pause" title="Start Timer" class="btn btn-secondary type="button"><i class="fa fa-play"></i></button>
+
+            <!-- Stop  -->
+            <button id="timer-stop" title="Stop Timer" class="btn btn-secondary type="button"><i class="fa fa-stop"></i></button>
+
+            <!-- Skip -->
+            <button id="timer-skip" title="Skip" class="btn btn-secondary" type="button"><i class="fa fa-forward"></i></button>
+        </div>
+
+
+        <!-- EDIT DURATION INPUTS -->
+
+        <div id="edit-duration-inputs" class="collapse container">
+
+            <div class="edit-dur-row row">
+                <div class="col">
+                    <div class="form-group">
+                        <!-- Hour -->
+                        <select id="edit-hour" class="selectpicker form-control">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                        </select>
+                        <label for="edit-hour" class="set-unit-labels">hour</label>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="form-group">
+                        <!-- Minute -->
+                        <select id="edit-min" class="selectpicker form-control">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                            <option value="25">25</option>
+                            <option value="26">26</option>
+                            <option value="27">27</option>
+                            <option value="28">28</option>
+                            <option value="29">29</option>
+                            <option value="30">30</option>
+                            <option value="31">31</option>
+                            <option value="32">32</option>
+                            <option value="33">33</option>
+                            <option value="34">34</option>
+                            <option value="35">35</option>
+                            <option value="36">36</option>
+                            <option value="37">37</option>
+                            <option value="38">38</option>
+                            <option value="39">39</option>
+                            <option value="40">40</option>
+                            <option value="41">41</option>
+                            <option value="42">42</option>
+                            <option value="43">43</option>
+                            <option value="44">44</option>
+                            <option value="45">45</option>
+                            <option value="46">46</option>
+                            <option value="47">47</option>
+                            <option value="48">48</option>
+                            <option value="49">49</option>
+                            <option value="50">50</option>
+                            <option value="51">51</option>
+                            <option value="52">52</option>
+                            <option value="53">53</option>
+                            <option value="54">54</option>
+                            <option value="55">55</option>
+                            <option value="56">56</option>
+                            <option value="57">57</option>
+                            <option value="58">58</option>
+                            <option value="59">59</option>
+                        </select>
+                        <label for="edit-min" class="set-unit-labels">min</label>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="form-group">
+                        <!-- Second -->
+                        <select id="edit-sec" class="selectpicker form-control">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                            <option value="25">25</option>
+                            <option value="26">26</option>
+                            <option value="27">27</option>
+                            <option value="28">28</option>
+                            <option value="29">29</option>
+                            <option value="30">30</option>
+                            <option value="31">31</option>
+                            <option value="32">32</option>
+                            <option value="33">33</option>
+                            <option value="34">34</option>
+                            <option value="35">35</option>
+                            <option value="36">36</option>
+                            <option value="37">37</option>
+                            <option value="38">38</option>
+                            <option value="39">39</option>
+                            <option value="40">40</option>
+                            <option value="41">41</option>
+                            <option value="42">42</option>
+                            <option value="43">43</option>
+                            <option value="44">44</option>
+                            <option value="45">45</option>
+                            <option value="46">46</option>
+                            <option value="47">47</option>
+                            <option value="48">48</option>
+                            <option value="49">49</option>
+                            <option value="50">50</option>
+                            <option value="51">51</option>
+                            <option value="52">52</option>
+                            <option value="53">53</option>
+                            <option value="54">54</option>
+                            <option value="55">55</option>
+                            <option value="56">56</option>
+                            <option value="57">57</option>
+                            <option value="58">58</option>
+                            <option value="59">59</option>
+                        </select>
+                        <label for="edit-sec" class="set-unit-labels">sec</label>
+                    </div>
+                </div>
             </div>
+            
+            <!-- Submit -->
+            <button id="edit-duration-submit" class="timer-button set-button btn btn-sm btn-primary" type="button">Set Duration</button>
+                    
+
 
         </div>
+
     </div>
 
 
@@ -591,8 +608,8 @@
 
 
 
-        
-    <script src="pomodoroTimer_JP_Edits.js"></script>
+
+    <script src="timer.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

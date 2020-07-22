@@ -2,43 +2,25 @@
     --timer-width: 250px;
     --dropdown-width: 200px;
     --header-height: 35px;
-    --timer-container-color: #bbbbbb;
-    --timer-container-running-color: #b0d1c8;
+    --timer-container-color: #6c757d;;
+    --timer-container-running-color: #ff3939;
     --timer-bg-color: #ffffff;
     --countdown-bar-bg-color: #dddddd;
     --countdown-fill-width: 0%;
-    --countdown-fill-color: #5efc9a;
-    --dropdown-bg-color-highlight: #dddddd;
+    --countdown-fill-color: #34ffbb;
 }
 
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 12pt;
-    font-weight: bold;
-}
 
 /* TIMER CONTAINER */
 div.timer-container {
-    padding: 0;
-    border: 1pt solid black;
-    /* border: 4pt solid var(--timer-container-color); */
-    /* border-radius: 6pt; */
+    padding: 0 0 5px;
+    border: 4pt solid var(--timer-container-color);
+    border-radius: 6pt;
     width: var(--timer-width);
     text-align: center;
     background-color: var(--timer-bg-color);
     z-index: 4;
 }
-
-/* Running: */
-div.timer-container.running {
-    border: 4pt solid var(--timer-container-running-color);
-}
-
-/* Complete: */
-div.timer-container.complete {
-    border: 4pt solid var(--timer-complete-color);
-}
-
 
 /* TIMER HEADER */
 div.timer-header,
@@ -46,17 +28,23 @@ select.task-dropdown-header {
     width: 100%;
     height: var(--header-height);
     background-color: var(--timer-container-color);
+    color: white;
+    border: none;
+    outline: none;
 }
 
 /* Running: */
+div.timer-container.running {
+    border: 4pt solid var(--timer-container-running-color);    
+}
+
 div.timer-container.running > div.timer-header,
 div.timer-container.running > select.task-dropdown-header {
     background-color: var(--timer-container-running-color);
+    color: #FFFFFF;
 }
 
-
-
-
+/* BREAK HEADER */
 div.break-header {
     height: var(--header-height);
     display: flex;
@@ -69,25 +57,27 @@ div.task-timer > div.break-header {
     display: none;
     height: 0;
 }
-
 div.break-timer > select.task-dropdown-header {
     display: none;
 }
 
 
-
 /* COUNTDOWN */
 .countdown-bar {
-    position: relative;
+    display: grid;
+    grid-template-columns: auto;
+    align-content: center;
     height: 60px;
-    margin: 0.7em 0;
+    width: 100%;
+    margin: 15px 0;
     background-color: var(--countdown-bar-bg-color);
     z-index: 1;
 }
 
 /* Visual fill background bar: */
 .countdown-fill {
-    position: absolute;
+    grid-row-start: 1;
+    grid-column: 1 / 1;
     content: "";
     height: 60px;
     width: var(--countdown-fill-width);
@@ -97,43 +87,43 @@ div.break-timer > select.task-dropdown-header {
 
 /* COUNTDOWN TIME */
 .countdown-time {
-    position: relative;
+    grid-row-start: 1;
+    grid-column: 1 / 1;
     height: 60px;
-    font-size: 34pt;
-    font-weight: bold;
+    line-height: 50px;
+    font-size: 48pt;
+    font-weight: normal;
     z-index: 3;
-    padding: 0.1em;
 }
 
 /* HIDDEN */
-div.hidden {
-    display: none;
-    pointer-events: none;
-}
-
+div.hidden, 
 div.hidden > * {
     display: none;
     pointer-events: none;
 }
 
-
-
-/* EDIT DURATION Container */
-div.edit-duration-container {
-    padding: 0 0 1em;
+/* BUTTONS */
+.timer-button {
+    margin: 0 0 10px;
 }
 
-/* Edit Dur Inputs Container */
-div.edit-duration-container > #edit-duration-inputs {
-    margin: 0.5em 0 0;
+/* EDIT DURATION INPUTS */
+div.edit-dur-row,
+div.edit-dur-row > .col {
+    padding: 0;
+    margin: 0;
+    min-height: 10px;
 }
 
-/* Unit Labels For Set/Edit Time Inputs */
+div.edit-dur-row > .col > .form-group {
+    margin: 4px;
+}
+
+
 label.set-unit-labels {
     font-size: 10pt;
-    /* font-weight: normal; */
-    padding: 0 0.5em 0 0;
+    font-weight: bold;
+    padding: 0;
     margin: 0;
 }
-
-
