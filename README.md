@@ -23,5 +23,34 @@ Bootstrap 4
 
 # API Documentation
 
-Tomato uses Swagger for API documentation. Paste the contents of docs/tomato.yaml
+Tomato uses Swagger for Backend API documentation. Paste the contents of docs/tomato.yaml
 into https://editor.swagger.com
+
+
+# Server Setup
+
+To set up the server, MySQL needs to be configured and the database schema imported.
+
+
+## Create config file
+
+
+* cp lib/config.dist.js lib/config.js
+* Update lib/config.js with your MySQL credentials
+
+## Import the development Schema
+
+To use the class sql server, the system must be on OSU network or VPN.
+
+* mysql -u cs361_onid -h classmysql.engr.oregonstate.edu cs361_onid < docs/db_schema.sql -p
+
+
+## Start the dev server
+* npm start
+
+
+## Testing with Postman
+
+API Endpoints can be tested with the software Postman ( postman.com)
+
+Import the collection docs/Tomato.postman.json
