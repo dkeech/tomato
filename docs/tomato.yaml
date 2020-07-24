@@ -5,7 +5,7 @@ info:
   description: Tomato implementation of Pomedero
 
 paths:
-  /user:
+  /api/user:
     post:
       summary: Create a new User.
       description: >
@@ -41,14 +41,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        '403':
+        '500':
           description: >
-            Endpoint requires authentication
+            An internal server error occurred.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-  /user/{id}:
+  /api/user/{id}:
     parameters:
       - name: id
         in: path
@@ -87,6 +87,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+        '500':
+          description: >
+            An internal server error occurred.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
     patch:
       summary: Update a User.
       description: >
@@ -118,6 +125,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+        '500':
+          description: >
+            An internal server error occurred.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
     delete:
       summary: Delete a User account (NOT IMPLEMENTED!)
       description: >
@@ -141,7 +155,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-  /user/{id}/reset/:
+        '500':
+          description: >
+            An internal server error occurred.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/user/{id}/reset/:
     parameters:
       - name: id
         in: path
@@ -176,7 +197,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-  /user/login:
+        '500':
+          description: >
+            An internal server error occurred.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/user/login:
     post:
       summary: Attempt to log in a User.
       description: >
@@ -224,13 +252,13 @@ paths:
                 $ref: '#/components/schemas/Error'
         '500':
           description: >
-            An internal server error occurred.
+            An internal server error occurred. occurred.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
 
-  /category:
+  /api/category:
     get:
       summary: Fetch the list of all Categories for this User.
       description: >
@@ -292,7 +320,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-  /category/{id}:
+        '500':
+          description: >
+            An internal server error occurred. occurred.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/category/{id}:
     parameters:
       - name: id
         in: path
@@ -335,6 +370,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+        '500':
+          description: >
+            An internal server error occurred. occurred.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
     delete:
       summary: Delete a Category
       description: >
@@ -358,8 +400,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+        '500':
+          description: >
+            An internal server error occurred. occurred.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 
-  /tasks:
+  /api/tasks:
     get:
       summary: Fetch the list of all Tasks for this User.
       description: >
@@ -437,7 +486,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-  /tasks/{id}:
+        '500':
+          description: >
+            An internal server error occurred. occurred.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/tasks/{id}:
     parameters:
       - name: id
         in: path
@@ -477,6 +533,26 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Task'
+        '403':
+          description: >
+            Endpoint requires authentication
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Task `id` not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: >
+            An internal server error occurred. occurred.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 
     patch:
       summary: Update a Task.
@@ -528,6 +604,13 @@ paths:
                 $ref: '#/components/schemas/Error'
         '404':
           description:  Task `id` not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: >
+            An internal server error occurred. occurred.
           content:
             application/json:
               schema:
