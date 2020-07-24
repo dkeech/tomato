@@ -18,6 +18,8 @@ const {
 /*
  * Get all Categories for a user
  *
+ * @TODO enable authentication with requireAuth pre-route
+ * router.get('/', requireAuth, (req, res, next) => {
  */
 router.get('/', (req, res, next) => {
   const db = getDB();
@@ -55,8 +57,11 @@ router.get('/', (req, res, next) => {
 /*
  * Create a new Category
  *
+ * @TODO add field validation
+ * @TODO enable authentication with requireAuth pre-route
+ * router.post('/', requireAuth, (req, res, next) => {
  */
-router.post('/', async (req, res, next) => {
+router.post('/', (req, res, next) => {
   const db = getDB();
   //  Validate required fields here
 
@@ -104,8 +109,12 @@ router.post('/', async (req, res, next) => {
 /*
  * Update a Category
  *
+ * @TODO add field validation
+ * @TODO enable authentication with requireAuth pre-route
+ * router.post('/', requireAuth, (req, res, next) => {
+ *
  */
-router.patch('/:id', async (req, res, next) => {
+router.patch('/:id', (req, res, next) => {
   const db = getDB();
   // Fetch User Id from JWT token
   user_id = 1;
@@ -141,6 +150,8 @@ router.patch('/:id', async (req, res, next) => {
 /*
  * Delete a Category
  *
+ * @TODO enable authentication with requireAuth pre-route
+ * router.delete('/:id', requireAuth, (req, res, next) => {
  */
 router.delete('/:id', async (req, res, next) => {
   const db = getDB();

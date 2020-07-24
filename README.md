@@ -42,7 +42,7 @@ To set up the server, MySQL needs to be configured and the database schema impor
 
 To use the class sql server, the system must be on OSU network or VPN.
 
-* mysql -u cs361_onid -h classmysql.engr.oregonstate.edu cs361_onid < docs/db_schema.sql -p
+* mysql -p -u cs361_onid -h classmysql.engr.oregonstate.edu cs361_onid < docs/db_schema.sql 
 
 
 ## Start the dev server

@@ -19,6 +19,7 @@ const {
 /*
  * Create a new User account
  *
+ * @TODO add field validation
  */
 router.post('/', async (req, res, next) => {
   const db = getDB();
@@ -70,7 +71,7 @@ router.get('/:id', (req, res, next) => {
   const db = getDB();
 
   // Check here if ID of user matches ID of JWT token
-  //
+
   try {
 
     console.log(" == getUserDetails: ", req.params.id);
@@ -103,6 +104,7 @@ router.get('/:id', (req, res, next) => {
 /*
  * Update the details of a User
  *
+ * @TODO verify field set
  * @TODO enable authentication with requireAuth pre-route
  * router.patch('/:id', requireAuth, (req, res, next) => {
  */
