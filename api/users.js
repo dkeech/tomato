@@ -197,26 +197,26 @@ router.post('/login', async (req, res, next) => {
 
   try {
     // Fetch user details from the data base
-    user = {
+    dbUser = {
       id: 1000,
       username:'fake',
       email: 'fake@example.org',
-      password: 'password'
+      password: await bcrypt.hash('password', 8)
     }
 
-    checkUser = req.body;
-    console.log("== user", user, "checkuser", checkUser);
+    input = req.body;
+    console.log("== dbUser", dbUser, "input", input);
 
     // verify password
-    const auth = user && await bcrypt.compare(user.password, checkUser.password)
-    console.log("== pwd cmp", await bcrypt.compare(user.password, checkUser.password))
+    const auth = dbUser && await bcrypt.compare(input.password, dbUser.password)
+    console.log("== pwd cmp", await bcrypt.compare(input.password, dbUser.password))
     if (auth) {
 
       // frontend does not need password
-      delete user.password;
+      delete dbUser.password;
 
       // Generate a JWT token with the user payload
-      const token = genAuthToken(user);
+      const token = genAuthToken(dbUser);
 
       res.status(200).send({
         token: token

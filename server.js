@@ -26,13 +26,13 @@ app.use(bodyParser.json());
 //app.use(logger);
 
 /*
- * API routes live under routes/ directory
+ * API routes live under api/ directory
  */
 app.use('/api', api);
 
 /*
  * TomatoError handling route
- * This route will allow any other route to call next(new TomatoError(str, codde))
+ * This route will allow any other route to call next(new TomatoError(str, code))
  * when an exception occurs and this route will pick it up and send
  * the appropriate HTTP response code with the message,
  */
