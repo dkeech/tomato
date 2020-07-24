@@ -46,7 +46,12 @@ To use the class sql server, the system must be on OSU network or VPN.
 
 
 ## Start the dev server
+
+By default it will start the server on port 9000. This can be changed with a PORT environment variable.
+
 * npm start
+* PORT=4000 npm start
+
 
 
 ## Testing with Postman
