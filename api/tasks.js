@@ -19,11 +19,11 @@ const {
  * Get all Tasks for a User
  *
  */
-router.get('/', async (req, res, next) => {
+router.get('/', requireAuth, (req, res, next) => {
   const db = getDB();
-
   // Fetch ID from JWT token
-  let user_id = 1;
+  let user_id = req.user.user_id;
+
   try {
 
     console.log(" == getTasks: ", user_id);
@@ -55,11 +55,12 @@ router.get('/', async (req, res, next) => {
  * Create a new Task
  *
  */
-router.post('/', async (req, res, next) => {
+router.post('/', requireAuth, (req, res, next) => {
   const db = getDB();
-  //  Validate required fields here
   // Fetch ID from JWT token
-  let user_id = 1;
+  let user_id = req.user.user_id;
+
+  //  Validate required fields here
   if (true) {
     try {
 
@@ -102,25 +103,23 @@ router.post('/', async (req, res, next) => {
  * Get details of a Task
  *
  */
-router.get('/:id', async (req, res, next) => {
+router.get('/:id', requireAuth, (req, res, next) => {
   const db = getDB();
+  // Fetch ID from JWT token
+  let user_id = req.user.user_id;
 
-  // Check here if ID of user matches ID of JWT token
-  //
   try {
 
     console.log(" == getTaskDetails: ", req.params.id);
 
-    let sql = 'SELECT * FROM tasks WHERE task_id = ?';
+    let sql = 'SELECT * FROM tasks WHERE task_id = ? AND user_id = ?';
 
-    db.query(sql, [req.params.id], function(err, results) {
+    db.query(sql, [req.params.id, user_id], function(err, results) {
       if (err) {
         // Pass any database errors to the error route
         next(new TomatoError("Database error: " + err.message, 500));
       } else {
         // Check for result not found
-
-        // if results
         console.log('results', results);
         res.status(200).send(results[0]);
       }
@@ -138,17 +137,19 @@ router.get('/:id', async (req, res, next) => {
  * Update a Task
  *
  */
-router.patch('/:id', async (req, res, next) => {
+router.patch('/:id', requireAuth, (req, res, next) => {
   const db = getDB();
-  // Check here if ID of user matches ID of JWT token
+  // Fetch ID from JWT token
+  let user_id = req.user.user_id;
+
   // Check here if field set matches
   try {
 
     console.log(" == updateTask: ", req.body);
 
-    let sql = 'UPDATE tasks SET ? WHERE task_id = ?';
+    let sql = 'UPDATE tasks SET ? WHERE task_id = ? AND user_id = ?';
 
-    db.query(sql, [req.body, req.params.id], function(err, results) {
+    db.query(sql, [req.body, req.params.id, user_id], function(err, results) {
       if (err) {
         // Pass any database errors to the error route
         next(new TomatoError("Database error: " + err.message, 500));
@@ -172,12 +173,11 @@ router.patch('/:id', async (req, res, next) => {
  * Delete a Task
  *
  */
-router.delete('/:id', async (req, res, next) => {
+router.delete('/:id', requireAuth, (req, res, next) => {
   const db = getDB();
-  console.log(" == deleteTask: ", req.params.id);
 
   // Fetch user ID from JWT token
-  user_id = 1;
+  let user_id = req.user.user_id;
 
   try {
 
