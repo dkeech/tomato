@@ -17,6 +17,7 @@ const {
   userIsUser
 } = require('../lib/auth');
 
+
 /*
  * Create a new User account
  *
@@ -61,6 +62,7 @@ router.post('/', async (req, res, next) => {
     next(new TomatoError("Request is not valid", 400));
   }
 });
+
 
 /*
  * Get the details of a User
@@ -140,6 +142,7 @@ router.patch('/:id', requireAuth, userIsUser, async (req, res, next) => {
   }
 
 });
+
 
 /*
  * Delete a User account

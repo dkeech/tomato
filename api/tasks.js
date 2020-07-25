@@ -99,6 +99,7 @@ router.post('/', requireAuth, (req, res, next) => {
   }
 });
 
+
 /*
  * Get details of a Task
  *
@@ -133,6 +134,7 @@ router.get('/:id', requireAuth, (req, res, next) => {
 
 });
 
+
 /*
  * Update a Task
  *
@@ -166,7 +168,6 @@ router.patch('/:id', requireAuth, (req, res, next) => {
     next(new TomatoError("Internal error adding user: " + err.message, 500));
   }
 });
-
 
 
 /*

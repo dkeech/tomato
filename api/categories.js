@@ -135,7 +135,6 @@ router.patch('/:id', requireAuth, (req, res, next) => {
 });
 
 
-
 /*
  * Delete a Category
  *
