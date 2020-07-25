@@ -13,7 +13,8 @@ const TomatoError = require("../lib/tomato-error");
 
 const {
   genAuthToken,
-  requireAuth
+  requireAuth,
+  userIsUser
 } = require('../lib/auth');
 
 /*
@@ -64,13 +65,12 @@ router.post('/', async (req, res, next) => {
 /*
  * Get the details of a User
  *
- * @TODO enable authentication with requireAuth pre-route
- * router.get('/:id', requireAuth, (req, res, next) => {
  */
-router.get('/:id', (req, res, next) => {
+router.get('/:id', requireAuth, userIsUser, (req, res, next) => {
   const db = getDB();
 
   // Check here if ID of user matches ID of JWT token
+  console.log('== Bearer Token', req.user);
 
   try {
 
@@ -105,10 +105,8 @@ router.get('/:id', (req, res, next) => {
  * Update the details of a User
  *
  * @TODO verify field set
- * @TODO enable authentication with requireAuth pre-route
- * router.patch('/:id', requireAuth, (req, res, next) => {
  */
-router.patch('/:id', async (req, res, next) => {
+router.patch('/:id', requireAuth, userIsUser, async (req, res, next) => {
   const db = getDB();
   // Check here if ID of user matches ID of JWT token
   // Check here if field set matches
@@ -129,8 +127,8 @@ router.patch('/:id', async (req, res, next) => {
         // Pass any database errors to the error route
         next(new TomatoError("Database error: " + err.message, 500));
       } else {
-          console.log('results', results );
-          res.status(200).send({});
+        console.log('results', results);
+        res.status(200).send({});
 
       }
     });
@@ -157,10 +155,8 @@ router.patch('/:id', async (req, res, next) => {
 /*
  * Reset a User account - Delete all Categories & Tasks
  *
- * @TODO enable authentication with requireAuth pre-route
- * router.delete('/:id/reset', requireAuth, (req, res, next) => {
  */
-router.delete('/:id/reset', (req, res, next) => {
+router.delete('/:id/reset', requireAuth, userIsUser, (req, res, next) => {
   const db = getDB();
   // Check here if ID of user matches ID of JWT token
   //
@@ -196,34 +192,42 @@ router.post('/login', async (req, res, next) => {
   const db = getDB();
 
   try {
+
+
     // Fetch user details from the data base
-    dbUser = {
-      id: 1000,
-      username:'fake',
-      email: 'fake@example.org',
-      password: await bcrypt.hash('password', 8)
-    }
+    let sql = "SELECT * FROM users where username = ?";
+    db.query(sql, req.body.username, async function(err, results) {
+      if (err) {
+        // Pass any database errors to the error route
+        next(new TomatoError("Database error: " + err.message, 500));
+      } else {
 
-    input = req.body;
-    console.log("== dbUser", dbUser, "input", input);
+        let input = req.body;
+        let dbUser = results[0];
+        console.log("== results", dbUser, "input", input);
 
-    // verify password
-    const auth = dbUser && await bcrypt.compare(input.password, dbUser.password)
-    console.log("== pwd cmp", await bcrypt.compare(input.password, dbUser.password))
-    if (auth) {
+        // verify password
+        const auth = results && await bcrypt.compare(input.password, dbUser.password);
 
-      // frontend does not need password
-      delete dbUser.password;
+        if (auth) {
 
-      // Generate a JWT token with the user payload
-      const token = genAuthToken(dbUser);
+          // frontend does not need password
+          delete dbUser.password;
 
-      res.status(200).send({
-        token: token
-      });
-    } else {
-      next(new TomatoError("Authentication failed.", 401));
-    }
+          // Generate a JWT token with the user payload
+          const token = genAuthToken(dbUser);
+
+          res.status(200).send({
+            token: token
+          });
+        } else {
+          next(new TomatoError("Authentication failed.", 401));
+        }
+
+      }
+    });
+
+
   } catch (err) {
     console.error(err);
     next(new TomatoError("Authentication error.  Please try again later.", 500));
