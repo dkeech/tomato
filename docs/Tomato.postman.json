@@ -65,6 +65,16 @@
 				{
 					"name": "User Login",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{student}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -96,10 +106,20 @@
 				{
 					"name": "Get User Details",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/api/users/8",
+							"raw": "http://localhost:8000/api/users/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -108,7 +128,7 @@
 							"path": [
 								"api",
 								"users",
-								"8"
+								"1"
 							],
 							"query": [
 								{
@@ -125,11 +145,21 @@
 				{
 					"name": "Update User",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PATCH",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n   \"username\":\"test2\",\n   \"email\":\"new_test@example.org\",\n   \"password\":\"password\"\n}",
+							"raw": "{\n   \"username\":\"test\",\n   \"email\":\"newemail@example.org\",\n   \"password\":\"password\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -137,7 +167,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8000/api/users/8",
+							"raw": "http://localhost:8000/api/users/2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -146,7 +176,7 @@
 							"path": [
 								"api",
 								"users",
-								"8"
+								"2"
 							]
 						},
 						"description": "Update a user"
@@ -156,10 +186,20 @@
 				{
 					"name": "Reset a user",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/api/users/8/reset",
+							"raw": "http://localhost:8000/api/users/1/reset",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -168,7 +208,7 @@
 							"path": [
 								"api",
 								"users",
-								"8",
+								"1",
 								"reset"
 							]
 						},
@@ -185,11 +225,21 @@
 				{
 					"name": "Create Category",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{ \"category_name\": \"Homework\"\n}",
+							"raw": "{ \"category_name\": \"Yard work\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -215,6 +265,16 @@
 				{
 					"name": "Get Categories",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -236,6 +296,16 @@
 				{
 					"name": "Update Category",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PATCH",
 						"header": [],
 						"body": {
@@ -267,10 +337,20 @@
 				{
 					"name": "Delete Category",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/api/categories/1",
+							"raw": "http://localhost:8000/api/categories/2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -279,7 +359,7 @@
 							"path": [
 								"api",
 								"categories",
-								"1"
+								"2"
 							]
 						},
 						"description": "Delete a category and all related tasks."
@@ -295,11 +375,21 @@
 				{
 					"name": "Create Task",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{ \"category_id\": 6,\n    \"task_name\": \"CS361 HW 8\",\n    \"time_duration\": 3600\n}",
+							"raw": "{ \"category_id\": 3,\n    \"task_name\": \"Weed Garden\",\n    \"time_duration\": 3600\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -325,6 +415,16 @@
 				{
 					"name": "Get All Tasks",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -346,11 +446,21 @@
 				{
 					"name": "Update Task",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PATCH",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{ \"category_id\": 5,\n    \"task_name\": \"Sprint 2\",\n    \"time_duration\": 7200,\n    \"description\": \"Work on Sprint 2\"\n}",
+							"raw": "{ \"category_id\": 6,\n    \"task_name\": \"Sprint 2\",\n    \"time_duration\": 7200,\n    \"description\": \"Work on Sprint 2\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -377,6 +487,16 @@
 				{
 					"name": "Update Task Time only",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PATCH",
 						"header": [],
 						"body": {
@@ -408,10 +528,20 @@
 				{
 					"name": "Delete Task",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/api/tasks/2",
+							"raw": "http://localhost:8000/api/tasks/4",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -420,7 +550,7 @@
 							"path": [
 								"api",
 								"tasks",
-								"2"
+								"4"
 							]
 						},
 						"description": "Delete a user's task."
@@ -429,6 +559,45 @@
 				}
 			],
 			"protocolProfileBehavior": {}
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "2625b183-6a7c-4709-837a-0d57c4074247",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "c724dc37-88d0-4439-8dd6-a7a77e47aa8a",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "72796877-a81c-48f8-a952-98446587472c",
+			"key": "token",
+			"value": ""
 		}
 	],
 	"protocolProfileBehavior": {}
