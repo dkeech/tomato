@@ -108,15 +108,15 @@ router.get('/:id', requireAuth, userIsUser, (req, res, next) => {
  */
 router.patch('/:id', requireAuth, userIsUser, async (req, res, next) => {
   const db = getDB();
-  // Check here if ID of user matches ID of JWT token
-  // Check here if field set matches
+
+  //  Validate required fields here
   try {
 
     console.log(" == updateUser: ", req.body);
 
     let sql = 'UPDATE users SET ? WHERE user_id = ?';
     let user = req.body;
-    // Crypt the password if necessary
+    // Crypt the password if there was a password update
     if (req.body.password) {
       user.password = await bcrypt.hash(req.body.password, 8);
     }
@@ -158,13 +158,12 @@ router.patch('/:id', requireAuth, userIsUser, async (req, res, next) => {
  */
 router.delete('/:id/reset', requireAuth, userIsUser, (req, res, next) => {
   const db = getDB();
-  // Check here if ID of user matches ID of JWT token
-  //
+
   try {
 
     console.log(" == resetUser: ", req.params.id);
 
-    // ON CASCADE will delete tasks when categories are deleted
+    // MySQL FK ON CASCADE will delete tasks when categories are deleted
     let sql = 'DELETE from categories WHERE user_id = ? ;';
 
     db.query(sql, req.params.id, function(err, results) {
@@ -193,7 +192,6 @@ router.post('/login', async (req, res, next) => {
 
   try {
 
-
     // Fetch user details from the data base
     let sql = "SELECT * FROM users where username = ?";
     db.query(sql, req.body.username, async function(err, results) {
@@ -206,12 +204,10 @@ router.post('/login', async (req, res, next) => {
         let dbUser = results[0];
         console.log("== results", dbUser, "input", input);
 
-        // verify password
-        const auth = results && await bcrypt.compare(input.password, dbUser.password);
+        // Verify password
+        if (results && await bcrypt.compare(input.password, dbUser.password) {
 
-        if (auth) {
-
-          // frontend does not need password
+          // Token does not need crypt password
           delete dbUser.password;
 
           // Generate a JWT token with the user payload
@@ -223,7 +219,6 @@ router.post('/login', async (req, res, next) => {
         } else {
           next(new TomatoError("Authentication failed.", 401));
         }
-
       }
     });
 

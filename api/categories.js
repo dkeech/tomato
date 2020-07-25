@@ -21,7 +21,6 @@ const {
  */
 router.get('/', requireAuth, (req, res, next) => {
   const db = getDB();
-
   // Fetch ID from JWT token
   let user_id = req.user.user_id;
   try {
@@ -35,9 +34,7 @@ router.get('/', requireAuth, (req, res, next) => {
         // Pass any database errors to the error route
         next(new TomatoError("Database error: " + err.message, 500));
       } else {
-        // Check for result not found
-
-        // if results
+        // @TODO Do we need a not found code or is a empty array sufficient?
         console.log('results', results);
         res.status(200).send(results);
       }
@@ -59,11 +56,10 @@ router.get('/', requireAuth, (req, res, next) => {
  */
 router.post('/', requireAuth, (req, res, next) => {
   const db = getDB();
-  //  Validate required fields here
-
   // Fetch ID from JWT token
   let user_id = req.user.user_id;
 
+  //  Validate required fields here
   if (true) {
     try {
 
@@ -75,9 +71,8 @@ router.post('/', requireAuth, (req, res, next) => {
         user_id,
         req.body.category_name
       ];
-
-
       console.log("== cat", cat);
+
       db.query(sql, cat, function(err, results) {
         if (err) {
           // Pass any database errors to the error route
@@ -113,7 +108,7 @@ router.patch('/:id', requireAuth, (req, res, next) => {
   // Fetch User Id from JWT token
   let user_id = req.user.user_id;
 
-  // Check here if field set matches
+  //  Validate required fields here
   try {
 
     console.log(" == updateCategory: ", req.body);
@@ -154,7 +149,7 @@ router.delete('/:id', requireAuth, (req, res, next) => {
 
     console.log(" == deleteCategory: ", req.params.id);
 
-    // ON CASCADE will delete tasks when categories are deleted
+    // MySQL FK ON CASCADE will delete tasks when categories are deleted
     let sql = 'DELETE from categories WHERE category_id = ? AND user_id = ?;';
 
     db.query(sql, [req.params.id, user_id], function(err, results) {
