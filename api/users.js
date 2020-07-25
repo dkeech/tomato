@@ -205,7 +205,7 @@ router.post('/login', async (req, res, next) => {
         console.log("== results", dbUser, "input", input);
 
         // Verify password
-        if (results && await bcrypt.compare(input.password, dbUser.password) {
+        if (results && await bcrypt.compare(input.password, dbUser.password)) {
 
           // Token does not need crypt password
           delete dbUser.password;
